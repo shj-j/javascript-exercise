@@ -1,9 +1,19 @@
 function fetchData(url) {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
     // <-- start
     // TODO 22: 通过Promise实现异步请求
-
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+          resolve(xhr);
+        } else {
+          reject(xhr);
+        }
+      }
+    };
+    xhr.send();
     // end -->
   });
 }
